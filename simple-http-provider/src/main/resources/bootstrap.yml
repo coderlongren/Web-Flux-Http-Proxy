@@ -1,0 +1,15 @@
+# service instance name
+spring:
+  application:
+    name: webflux-server
+  # nacos discovery config
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+#
+#  server.port=8080
+#  spring.application.name=service-provider
+#  spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
+#  #如果不想 Nacos 注册和发现当前服务，可设置为false
+#  spring.cloud.nacos.discovery=true
