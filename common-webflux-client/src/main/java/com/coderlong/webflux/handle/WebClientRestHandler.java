@@ -9,6 +9,7 @@ import com.coderlong.webflux.beans.MethodInfo;
 import com.coderlong.webflux.beans.ServerInfo;
 import com.coderlong.webflux.utils.SpringContextHolder;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
  *
  * @author sailongren
  */
+@Slf4j
 public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> {
 
     private WebClient client;
@@ -23,8 +25,11 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
 
     @Override
     public void init(ServerInfo serverInfo) {
-        // this.client = WebClient.create(serverInfo.getUrl());
-
+        log.info("WebClientRestHandler start init.....");
+        //获取负载均衡的 webClient
+        WebClient.Builder bean = SpringContextHolder.getBean(WebClient.Builder.class);
+        client = bean.build();
+        log.info("WebClientRestHandler started success");
     }
 
     /**
@@ -33,16 +38,11 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
     @Override
     public Object invokeRest(MethodInfo methodInfo, ServerInfo serverInfo) {
         Object result = null;
-        //获取负载均衡的 webClient
-        WebClient.Builder bean = SpringContextHolder.getBean(WebClient.Builder.class);
-        client = bean.build();
         request = this.client
                 .method(methodInfo.getMethod())
                 .uri("http://" + serverInfo.getMicroName() + methodInfo.getUrl(), methodInfo.getParams())
                 .accept(MediaType.APPLICATION_JSON);
-
         ResponseSpec retrieve = null;
-
         // 判断是否带了body
         if (methodInfo.getBody() != null) {
             // 发出请求
