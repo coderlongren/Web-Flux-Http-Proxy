@@ -6,7 +6,7 @@ import lombok.Data;
 public class ServerInfo {
 
 	/**
-	 * 服务url
+	 * 微服务 域名
 	 */
 	private String url;
 

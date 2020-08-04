@@ -15,8 +15,9 @@ import reactor.core.publisher.Mono;
 /**
  * @author sailongren
  */
-@RestController
 @Slf4j
+@RestController
+@RequestMapping(value = "/user")
 public class UserServiceController {
     @Value("${server.port}")
     private String port;
@@ -26,7 +27,16 @@ public class UserServiceController {
         log.info("客户端发起了请求");
         User user = new User();
         user.setName("hi " + name + " ,i am from port:" + port);
-        Thread.sleep(1000);
         return Mono.just(user);
     }
+
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    Mono<String> defaultHello() throws InterruptedException {
+        log.info("客户端发起了请求");
+        User user = new User();
+        user.setName("hi " + " ,i am from port:" + port);
+        return Mono.just(user.toString());
+    }
+
 }

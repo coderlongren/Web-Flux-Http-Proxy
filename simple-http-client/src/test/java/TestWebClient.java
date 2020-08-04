@@ -1,5 +1,10 @@
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.coderlong.webflux.pojo.User;
 
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
@@ -10,17 +15,14 @@ public class TestWebClient {
     public void test(){
         WebClient webClient = WebClient.create();
         long start = System.currentTimeMillis();
-        Mono<String> mono = webClient.get().uri("http://localhost:8081/hello/rensailong").retrieve().bodyToMono(String.class);
-        mono.subscribe(res -> {System.out.println("获取到1 " + res);});
-        System.out.println("耗时" + (System.currentTimeMillis() - start) / 1000);
-        Mono<String> mono1 = webClient.get().uri("http://localhost:8081/hello/rensaiong").retrieve().bodyToMono(String.class);
-        mono.subscribe(res -> {System.out.println("获取到2 " + res);});
-        System.out.println("耗时" + (System.currentTimeMillis() - start) / 1000);
-
-        Mono<String> mono2 = webClient.get().uri("http://localhost:8081/hello/rensa").retrieve().bodyToMono(String.class);
-        mono.subscribe(res -> {System.out.println("获取到3 " + res);});
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "coderlong");
+        Mono<User> mono = webClient.get().uri("http://localhost:8081/hello/{name}", params).retrieve().bodyToMono(User.class);
+        User user = mono.block();
+        System.out.println(user);
         System.out.println("耗时" + (System.currentTimeMillis() - start) / 1000);
     }
+
     @Test
     public void test2() throws InterruptedException {
         long start = System.currentTimeMillis();

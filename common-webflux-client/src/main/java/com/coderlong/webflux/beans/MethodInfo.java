@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 方法调用信息类
+ * @author sailongren
  */
 @Data
 public class MethodInfo {
