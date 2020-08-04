@@ -25,6 +25,7 @@ public class UserServiceController {
     @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
     Mono<User> hello(@PathVariable("name") String name) throws InterruptedException {
         log.info("客户端发起了请求");
+        Thread.sleep(3000);
         User user = new User();
         user.setName("hi " + name + " ,i am from port:" + port);
         return Mono.just(user);
@@ -35,6 +36,7 @@ public class UserServiceController {
     Mono<String> defaultHello() throws InterruptedException {
         log.info("客户端发起了请求");
         User user = new User();
+        Thread.sleep(3000);
         user.setName("hi " + " ,i am from port:" + port);
         return Mono.just(user.toString());
     }
