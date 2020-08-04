@@ -1,8 +1,9 @@
-package com.coderlong.webflux.utils;
+package com.coderlong.webflux.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
  * @author sailongren
  */
 @Component
+@Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware {
     public static ApplicationContext applicationContext;
 
@@ -29,7 +31,6 @@ public class SpringContextHolder implements ApplicationContextAware {
     public static <T> T getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
     }
-
     public static <T> T getBean(String name, Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
     }

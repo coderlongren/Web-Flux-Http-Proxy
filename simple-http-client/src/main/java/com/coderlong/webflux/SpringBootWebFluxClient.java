@@ -8,7 +8,7 @@ import com.coderlong.webflux.annotation.ApiServerScan;
 /**
  * @author sailongren
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.coderlong.webflux")
 @ApiServerScan(packages = "com.coderlong.webflux.service")
 public class SpringBootWebFluxClient {
     public static void main(String[] args) {
