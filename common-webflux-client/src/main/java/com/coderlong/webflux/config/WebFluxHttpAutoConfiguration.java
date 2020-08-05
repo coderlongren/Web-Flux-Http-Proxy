@@ -17,6 +17,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
@@ -30,6 +31,7 @@ import com.coderlong.webflux.utils.ProxyUtil;
 /**
  * @author sailongren
  */
+@Configuration
 public class WebFluxHttpAutoConfiguration
         implements BeanFactoryAware, ImportBeanDefinitionRegistrar, ResourceLoaderAware {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebFluxHttpAutoConfiguration.class);

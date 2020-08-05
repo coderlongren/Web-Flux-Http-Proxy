@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 
 import com.coderlong.webflux.beans.MethodInfo;
 import com.coderlong.webflux.beans.ServerInfo;
+import com.coderlong.webflux.config.SpringContextHolder;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -22,13 +23,15 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
     private WebClient client;
     private RequestBodySpec request;
 
+
     @Override
     public void init(ServerInfo serverInfo) {
         log.info("WebClientRestHandler start init.....");
         //获取负载均衡的 webClient
 //        WebClient.Builder bean = SpringContextHolder.getBean(WebClient.Builder.class);
-        this.client = WebClient.create(serverInfo.getUrl());
-        log.info("WebClientRestHandler started success");
+        // 直接创建
+//        this.client = WebClient.create(serverInfo.getUrl());
+        // 自定义连接池方式
     }
 
     /**
@@ -36,6 +39,7 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
      */
     @Override
     public Object invokeRest(MethodInfo methodInfo, ServerInfo serverInfo) {
+        this.client = SpringContextHolder.getBean(WebClient.class);
         request = this.client
                 .method(methodInfo.getMethod())
                 .uri(serverInfo.getUrl() + methodInfo.getUrl(), methodInfo.getParams())

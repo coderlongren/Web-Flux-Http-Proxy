@@ -17,7 +17,13 @@ public class TestWebClient {
         long start = System.currentTimeMillis();
         Map<String, Object> params = new HashMap<>();
         params.put("name", "coderlong");
-        Mono<User> mono = webClient.get().uri("http://localhost:8081/hello/{name}", params).retrieve().bodyToMono(User.class);
+        Mono<User> mono = webClient.get().uri("http://localhost:8081/user/hello/{name}", params)
+                .retrieve()
+                .bodyToMono(User.class)
+                .map(user -> {
+                    System.out.println("最近线程" + Thread.currentThread().getName());
+                    return user;
+                });
         User user = mono.block();
         System.out.println(user);
         System.out.println("耗时" + (System.currentTimeMillis() - start) / 1000);
