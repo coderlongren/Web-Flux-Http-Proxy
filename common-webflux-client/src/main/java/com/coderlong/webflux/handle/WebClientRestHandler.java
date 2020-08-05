@@ -32,8 +32,6 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
         // 直接创建
 //        this.client = WebClient.create(serverInfo.getUrl());
         // 自定义连接池方式
-        this.client = SpringContextHolder.getBean(WebClient.class);
-        log.info("WebClientRestHandler started success");
     }
 
     /**
@@ -41,6 +39,7 @@ public class WebClientRestHandler implements RestHandle<MethodInfo, ServerInfo> 
      */
     @Override
     public Object invokeRest(MethodInfo methodInfo, ServerInfo serverInfo) {
+        this.client = SpringContextHolder.getBean(WebClient.class);
         request = this.client
                 .method(methodInfo.getMethod())
                 .uri(serverInfo.getUrl() + methodInfo.getUrl(), methodInfo.getParams())

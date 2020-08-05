@@ -36,11 +36,11 @@ public class WebClientConfig {
         ConnectionProvider connectionProvider = ConnectionProvider.builder("tcp-client-pool")
                 .maxConnections(1)
                 .pendingAcquireTimeout(Duration.ofMillis(60000))
-                .pendingAcquireMaxCount(3)
+                .pendingAcquireMaxCount(1)
                 .build();
         factory.setUseGlobalResources(false);
         factory.setConnectionProvider(connectionProvider);
-        factory.setLoopResources(LoopResources.create("httpClient", 30, true));
+        factory.setLoopResources(LoopResources.create("MyHttpClient", 30, true));
         return factory;
     }
 
@@ -51,8 +51,8 @@ public class WebClientConfig {
                         c.option(CONNECT_TIMEOUT_MILLIS, 3000)
                                 .option(TCP_NODELAY, true)
                                 .doOnConnected(conn -> {
-                                    conn.addHandlerLast(new ReadTimeoutHandler(3000));
-                                    conn.addHandlerLast(new WriteTimeoutHandler(3000));
+                                    conn.addHandlerLast(new ReadTimeoutHandler(30));
+                                    conn.addHandlerLast(new WriteTimeoutHandler(30));
                                 }));
 
         ClientHttpConnector connector =
