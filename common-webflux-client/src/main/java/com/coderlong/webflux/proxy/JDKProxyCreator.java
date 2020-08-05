@@ -15,13 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 使用jdk动态代理实现代理类
+ * @author sailongren
  */
 @Slf4j
 public class JDKProxyCreator extends AbstractProxyCreator {
 
     @Override
     public Object createProxy(Class<?> type) {
-        log.info("createProxy:" + type);
+        log.info("createProxy: {}", type);
         // 根据接口得到API服务器信息
         ServerInfo serverInfo = extractServerInfo(type);
         log.info("serverInfo: microName = {}", serverInfo.getMicroName());
@@ -36,7 +37,7 @@ public class JDKProxyCreator extends AbstractProxyCreator {
                     Object[] args) {
                 // 根据方法和参数得到调用信息
                 MethodInfo methodInfo = extractMethodInfo(method, args);
-                log.info("methodInfo:" + methodInfo);
+                log.info("methodInfo: {}", methodInfo);
                 // 调用rest
                 return handler.invokeRest(methodInfo, serverInfo);
             }
