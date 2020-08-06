@@ -19,9 +19,13 @@ import reactor.core.publisher.Mono;
 public class UserController {
     @Autowired
     private UserService userService;
+//
+//    @Autowired
+//    private UserMapper userMapper;
 
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
     public Mono<User> getUserWithNameSync() {
+//        userMapper.query(1);
         return userService.hello("hello world");
     }
 

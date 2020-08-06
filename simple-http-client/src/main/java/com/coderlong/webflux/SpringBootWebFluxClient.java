@@ -1,7 +1,9 @@
 package com.coderlong.webflux;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.coderlong.webflux.annotation.ApiServerScan;
@@ -9,7 +11,7 @@ import com.coderlong.webflux.annotation.ApiServerScan;
 /**
  * @author sailongren
  */
-@SpringBootApplication()
+@SpringBootApplication
 @ApiServerScan(packages = "com.coderlong.webflux.service")
 @ComponentScan({"com.coderlong.webflux"})
 public class SpringBootWebFluxClient {
