@@ -21,6 +21,7 @@
         <module>common-webflux-client</module>
         <module>simple-http-provider</module>
         <module>simple-http-client</module>
+        <module>spring-mvc-trace</module>
     </modules>
     <properties>
         <skywalking.version>6.5.0</skywalking.version>
