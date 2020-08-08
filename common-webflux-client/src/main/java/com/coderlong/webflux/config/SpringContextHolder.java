@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- *  ApplicationContext 获取
+ * ApplicationContext 获取
+ *
  * @author sailongren
  */
 @Component
@@ -19,6 +20,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringContextHolder.applicationContext = applicationContext;
     }
+
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
@@ -30,6 +32,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     public static <T> T getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
     }
+
     public static <T> T getBean(String name, Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
     }
