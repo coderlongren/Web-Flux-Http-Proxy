@@ -26,7 +26,7 @@
         <skywalking.version>6.5.0</skywalking.version>
         <grpc.version>1.13.1</grpc.version>
         <java.version>1.8</java.version>
-        <spring.boot.version>2.2.1.RELEASE</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>0.2.1.RELEASE</spring-cloud-alibaba.version>
     </properties>
